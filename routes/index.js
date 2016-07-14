@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user.js');
 var mongoose = require('mongoose');
-var user = require('../models/user').user;
-mongoose.connect('mongodb://localhost/test');
+//var user = require('../models/user').user;
+var settings = require('../settings');
+mongoose.connect('mongodb://'+settings.host + ':' + settings.port +'/'+ settings.db);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,8 +25,6 @@ router.get('/', function(req, res, next) {
         });
     })(query_doc);
 });*/
-
-var User = require('../models/user.js');
 
 router.post('/homepage', function(req, res) {
     User.get(req.body.userid, req.body.password,function(err,user){
